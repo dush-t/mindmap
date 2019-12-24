@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.app {
+  display: 'flex'
+}
+
+.title {
+  /* background-color: yellow; */
+  margin-right: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #ccc
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

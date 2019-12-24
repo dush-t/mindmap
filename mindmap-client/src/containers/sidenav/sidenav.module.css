@@ -1,0 +1,7 @@
+.sideNav {
+    float: left;
+    height: 100vh;
+    width: 30vw;
+    background-color: #f5f5f5;
+    padding-left: 10px;
+}

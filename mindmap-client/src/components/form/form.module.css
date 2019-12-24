@@ -1,0 +1,13 @@
+.formContainer {
+    width: 100%;
+    height: 100%;
+    /* padding: 10px; */
+}
+
+.mainInput {
+    margin-bottom: 30px;
+}
+
+.submitButton {
+    margin-top: 20px;
+}

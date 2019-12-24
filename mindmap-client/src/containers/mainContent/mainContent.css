@@ -1,0 +1,12 @@
+.mainContent {
+    float: right;
+    height: 100vh;
+    width: 67vw;
+    background-color: #fcfcfc;
+    /* margin-left: 400px; */
+    /* width: 100%; */
+}
+
+/* .mainContent > div:first-child {
+    display: none;
+} */

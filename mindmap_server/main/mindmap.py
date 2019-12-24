@@ -5,8 +5,8 @@ from urllib.parse import urlencode
 
 url = "https://api.datamuse.com/words?"
 
-def get_words(query_dict, type_filter=['n', 'adj', 'v']):
-    query_dict['max'] = 10
+def get_words(query_dict, type_filter=['adj', 'v']):
+    query_dict['max'] = 100
     query_dict['md'] = 'p'
     query_url = url + urlencode(query_dict)
     response = requests.get(query_url).json()
@@ -132,22 +132,18 @@ class MindMapBranch:
         if 'adj' in node_type:
             spc_words = get_words({'rel_spc': name})
             syn_words = get_words({'rel_syn': name}, ['n', 'adj'])
-            noun_words = get_words({'rel_jja': name}, ['n'])
-            print('spc', spc_words)
-            words = get_random_or_smaller(syn_words, 2) + get_random_or_smaller(spc_words, 2) + get_random_or_smaller(noun_words, 2)
+            words = get_random_or_smaller(syn_words, 4) + get_random_or_smaller(spc_words, 2) 
+            print(spc_words)
 
         elif 'n' in node_type:
-            spc_words = get_words({'rel_spc': name}, ['n', 'adj'])
-            syn_words = get_words({'rel_syn': name}, ['n', 'adj'])
             adj_words = get_words({'rel_jjb': name})
-            print('spc', spc_words)
-            words = get_random_or_smaller(adj_words, 3) + get_random_or_smaller(syn_words, 2) + get_random_or_smaller(spc_words, 1)
+            words = get_random_or_smaller(adj_words, 6)
 
         for word_data in words:
             node = Node(word_data['word'], 2, word_data['tags'])
             self.add_node(parent_node, node)
         
-        print('words', words)
+        # print('words', words)
         print('Populate complete')
 
 
