@@ -1,0 +1,4 @@
+__pycache__
+*.pyc
+mindmap_server/db.sqlite3
+/play.py
