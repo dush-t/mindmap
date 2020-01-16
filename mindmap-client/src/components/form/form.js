@@ -43,6 +43,12 @@ class DynamicForm extends Component {
         this.setState({ mainNameInput: event.target.value })
     }
 
+    keyPressedInDynamicInput = (event) => {
+        if (event.key === 'Enter') {
+            this.addInput()
+        }
+    }
+
     fetchFirstWordSuggestions = (event) => {
         const data = {word: this.state.mainNameInput}
         axios.post('api/get_related_words', data)
@@ -60,13 +66,15 @@ class DynamicForm extends Component {
                         value={inputs[key]}
                         changed={(event) => this.changeInputOfId(key, event)}
                         addClicked={this.addInput}
-                        removeClicked={() => this.removeInput(key)} />
+                        removeClicked={() => this.removeInput(key)}
+                        keyPressed={this.keyPressedInDynamicInput} />
         })
 
         return (
             <div className={classes.formContainer}>
-                <div>Keyword:</div>
+                <div><p>Keyword:</p></div>
                 <input 
+                    placeholder="Keyword"
                     className={classes.mainInput}
                     value={this.state.mainNameInput}
                     onChange={(event) => this.changeMainInput(event)}
