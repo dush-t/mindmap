@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import DynamicInput from './dynamicInput';
 
 import classes from './form.module.css'
+import axios from "../../axios-instance";
 
 
 class DynamicForm extends Component {
@@ -42,6 +43,16 @@ class DynamicForm extends Component {
         this.setState({ mainNameInput: event.target.value })
     }
 
+    fetchFirstWordSuggestions = (event) => {
+        const data = {word: this.state.mainNameInput}
+        axios.post('api/get_related_words', data)
+            .then((response) => {
+                let firstInputData = {};
+                response.data.forEach((wordData, i) => firstInputData[i] = wordData.word)
+                this.setState({firstChildInputs: {...firstInputData}})
+            })
+    }
+
     render() {
         const inputs = this.state.firstChildInputs;
         let inputArray = Object.keys(inputs).map((key) => {
@@ -54,11 +65,14 @@ class DynamicForm extends Component {
 
         return (
             <div className={classes.formContainer}>
+                <div>Keyword:</div>
                 <input 
                     className={classes.mainInput}
                     value={this.state.mainNameInput}
                     onChange={(event) => this.changeMainInput(event)}
                     label="MindMap Center"/>
+                <button onClick={this.fetchFirstWordSuggestions}>Get Suggestions</button>
+                <div>First suggestions:</div>
                 {inputArray}
                 <button
                     className={classes.submitButton}
